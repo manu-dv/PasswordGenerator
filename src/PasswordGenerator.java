@@ -19,13 +19,13 @@ public class PasswordGenerator {
         try (Scanner sc = new Scanner(System.in)) {
             do {
                 password = generatePassword(random);
-                System.out.println("Password: " + password);
+                System.out.println("Password: " + password); //NOSONAR
 
                 System.out.print("""
                         Do you like the password or would you prefer to generate a new one?
-                        (yes, to generate a new one/no, to keep de password):""");
+                        (yes, to generate a new one/no, to keep de password):"""); //NOSONAR
                 choice = sc.nextLine().toLowerCase();
-                System.out.println();
+                System.out.println(); //NOSONAR
             } while (!choice.equals("no") && !choice.equals("n"));
         }
     }
