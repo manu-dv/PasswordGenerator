@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class PasswordGenerator {
@@ -13,10 +14,11 @@ public class PasswordGenerator {
     public static void main(String[] args) {
         String choice;
         StringBuilder password;
+        Random random = new Random();
 
         try (Scanner sc = new Scanner(System.in)) {
             do {
-                password = generatePassword();
+                password = generatePassword(random);
                 System.out.println("Password: " + password);
 
                 System.out.print("""
@@ -28,28 +30,28 @@ public class PasswordGenerator {
         }
     }
 
-    private static StringBuilder generatePassword() {
+    private static StringBuilder generatePassword(Random random) {
         StringBuilder password = new StringBuilder();
         for (int i = 0; i < PAIRS; i++) {
-            password.append(generatePair());
+            password.append(generatePair(random));
         }
         for (int i = 0; i < NUMBER_OF_NUMBERS; i++) {
-            password.append(getRandomChar(NUMBERS));
+            password.append(getRandomChar(NUMBERS, random));
         }
         for (int i = 0; i < NUMBER_OF_SYMBOLS; i++) {
-            password.append(getRandomChar(SYMBOLS));
+            password.append(getRandomChar(SYMBOLS, random));
         }
         return password;
     }
 
-    private static char getRandomChar(String optios) {
-        return optios.charAt((int)(Math.random() * optios.length()));
+    private static char getRandomChar(String options, Random random) {
+        return options.charAt(random.nextInt(0,options.length()));
     }
 
-    private static String generatePair() {
+    private static String generatePair(Random random) {
         String pair = "";
-        pair += getRandomChar(CONSONANTS);
-        pair += getRandomChar(VOWELS);
+        pair += getRandomChar(CONSONANTS, random);
+        pair += getRandomChar(VOWELS, random);
         return pair;
     }
 }
